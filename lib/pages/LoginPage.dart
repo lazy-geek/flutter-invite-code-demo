@@ -3,7 +3,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:intl_phone_field/country_picker_dialog.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -95,7 +94,7 @@ class _LoginPageState extends State<LoginPage> {
               },
             ),
             SizedBox(
-              height: 35.0,
+              height: 30.0,
             ),
             Text(
               "We will send an OTP to verify this number",
@@ -110,18 +109,20 @@ class _LoginPageState extends State<LoginPage> {
               height: 65.0,
             ),
             OutlinedButton(
-              onPressed: () {},
-              child: Text(
-                'Continue',
-                style: GoogleFonts.poppins(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w600,
-                  fontSize: 18.0,
-                  letterSpacing: 1.25,
+              onPressed: () async {},
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
+                child: Text(
+                  'Continue',
+                  style: GoogleFonts.poppins(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 18.0,
+                    letterSpacing: 1.25,
+                  ),
                 ),
               ),
               style: OutlinedButton.styleFrom(
-                padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
                 backgroundColor: const Color(0xFF14C08D),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(5.0),

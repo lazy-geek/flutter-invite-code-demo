@@ -1,7 +1,12 @@
 // ignore_for_file: prefer_const_constructors
 // ignore_for_file: prefer_const_literals_to_create_immutables
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+
+import 'package:flutter_invite_code_demo/pages/LoginPage.dart';
+import 'package:flutter_invite_code_demo/widgets/ErrorToast.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class InviteCodePage extends StatefulWidget {
@@ -12,6 +17,22 @@ class InviteCodePage extends StatefulWidget {
 }
 
 class _InviteCodePageState extends State<InviteCodePage> {
+  late TextEditingController code;
+  bool _isLoading = false;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    code = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    code.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,6 +55,7 @@ class _InviteCodePageState extends State<InviteCodePage> {
               height: 99.0,
             ),
             TextField(
+              controller: code,
               textAlign: TextAlign.center,
               style: GoogleFonts.lato(
                 fontWeight: FontWeight.w500,
@@ -76,18 +98,53 @@ class _InviteCodePageState extends State<InviteCodePage> {
               height: 119.0,
             ),
             OutlinedButton(
-              onPressed: () {},
-              child: Text(
-                'Continue',
-                style: GoogleFonts.poppins(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w600,
-                  fontSize: 24.0,
-                  letterSpacing: 1.25,
-                ),
+              onPressed: () async {
+                setState(() {
+                  _isLoading = true;
+                });
+                CollectionReference _collectionRef =
+                    FirebaseFirestore.instance.collection('invites');
+                QuerySnapshot isValid = await _collectionRef
+                    .where('code',
+                        isEqualTo: int.parse(code.text == '' ? '0' : code.text))
+                    .get();
+                print(isValid.size >= 1);
+                setState(() {
+                  _isLoading = false;
+                });
+                if (isValid.size >= 1) {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => LoginPage()));
+                } else {
+                  FToast().init(context).showToast(
+                      gravity: ToastGravity.TOP,
+                      positionedToastBuilder: (context, child) {
+                        return Positioned(
+                          child: child,
+                          top: MediaQuery.of(context).viewPadding.top,
+                          left: 0,
+                        );
+                      },
+                      child: ErrorToast());
+                }
+              },
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
+                child: _isLoading
+                    ? CircularProgressIndicator(
+                        color: Colors.black,
+                      )
+                    : Text(
+                        'Continue',
+                        style: GoogleFonts.poppins(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 24.0,
+                          letterSpacing: 1.25,
+                        ),
+                      ),
               ),
               style: OutlinedButton.styleFrom(
-                padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
                 backgroundColor: const Color(0xFF14C08D),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(5.0),
