@@ -56,6 +56,7 @@ class _InviteCodePageState extends State<InviteCodePage> {
             ),
             TextField(
               controller: code,
+              keyboardType: TextInputType.number,
               textAlign: TextAlign.center,
               style: GoogleFonts.lato(
                 fontWeight: FontWeight.w500,
