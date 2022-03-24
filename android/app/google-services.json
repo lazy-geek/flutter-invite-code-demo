@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "951665739642",
+    "project_id": "invite-code-716b3",
+    "storage_bucket": "invite-code-716b3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:951665739642:android:57cc365b77e7a8b0f6f8c3",
+        "android_client_info": {
+          "package_name": "com.example.flutter_invite_code_demo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "951665739642-0obrnb9nsp530ci80qpto6mlnnb29ufm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAArj__btj6JR1AqmUimt89sBTIgEiSFks"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "951665739642-0obrnb9nsp530ci80qpto6mlnnb29ufm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
